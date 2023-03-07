@@ -1,0 +1,12 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Ad
+{% endblock title %}
+
+{% block content %}
+<h1>{{ ad.title }}</h1>
+{{ ad.time_in }}
+<hr>
+{{ ad.text }}
+{% endblock content %}
