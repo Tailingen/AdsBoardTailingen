@@ -43,7 +43,7 @@ def mail_new():
         {
             'post': post,
             'text': post.text,
-            'link': f'http://127.0.0.1:8000/news/{post.pk}',
+            'link': f'http://127.0.0.1:8000/ads/{post.pk}',
         }
     )
 

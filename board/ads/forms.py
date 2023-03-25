@@ -6,7 +6,7 @@ from .models import Post, Reply
 class PostForm(forms.ModelForm):
    class Meta:
        model = Post
-       fields = ['author', 'category', 'title', 'text']
+       fields = ['category', 'title', 'text']
 
        def clean(self):
            cleaned_data = super().clean()
@@ -21,4 +21,4 @@ class PostForm(forms.ModelForm):
 class ReplyForm(forms.ModelForm):
     class Meta:
        model = Reply
-       fields = ['post', 'user', 'text']
+       fields = ['post', 'text']

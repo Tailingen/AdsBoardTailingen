@@ -32,7 +32,11 @@ class PostCategory(models.Model):
 
 class Reply(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Author, on_delete=models.CASCADE)
     text = models.TextField()
     time_in = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse('replys', args=[str(self.id)])
+
 
