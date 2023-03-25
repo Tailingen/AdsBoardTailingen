@@ -9,4 +9,11 @@ Ad
 {{ ad.time_in }}
 <hr>
 {{ ad.text }}
+<hr>
+<p class="text-center"><a href="{{ ad.pk }}/reply" class="btn btn-secondary btn-sm">Откликнуться</a></p>
+{% if user == ad.author.user %}
+<p class="text-center"><a href="{{ ad.pk }}/allreplys" class="btn btn-secondary btn-sm">Посмотреть отклики</a></p>
+<p class="text-center"><a href="{{ ad.pk }}/update" class="btn btn-secondary btn-sm">Редактировать объявление</a></p>
+<p class="text-center"><a href="{{ ad.pk }}/delete" class="btn btn-secondary btn-sm">Удалить объявление</a></p>
+{% endif %}
 {% endblock content %}

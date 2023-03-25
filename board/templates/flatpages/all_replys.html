@@ -1,0 +1,21 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Reply
+{% endblock title %}
+
+{% block content %}
+   <h1>Отзывы</h1>
+   <hr>
+      <table>
+         {% for x in all_replys %}
+          {% if x.post.post_id is ad.pk %}
+          <tr>
+          <td>{{ x.time_in }}</td>
+          <td><a href="/ads/replys/{{ x.pk }}">{{ x.text|truncatechars:120 }}</a></td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+      </table>
+
+{% endblock content %}
