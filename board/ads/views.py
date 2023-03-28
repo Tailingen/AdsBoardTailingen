@@ -1,7 +1,7 @@
 import logging
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView)
 from .models import Author, Post, Category, PostCategory, Reply
 from .forms import PostForm, ReplyForm
@@ -9,7 +9,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.template.loader import render_to_string
 from django.shortcuts import redirect, get_object_or_404, render
-from .tasks import mail_new
 
 class AdsList(ListView):
     model = Post

@@ -6,12 +6,6 @@ from django.template.loader import render_to_string
 
 from ads.models import Post, Category
 
-
-@shared_task
-def hello():
-    print("Hello, world!")
-
-
 @shared_task
 def mail_spam():
     today = datetime.datetime.now()
@@ -33,26 +27,4 @@ def mail_spam():
         to=subscribers,
     )
     msg.attach_alternative(html_content, 'text/html')
-    msg.send()
-
-@shared_task
-def mail_new():
-    post = Post.save(commit=False)
-    html_content = render_to_string(
-        'ads/post_created.html',
-        {
-            'post': post,
-            'text': post.text,
-            'link': f'http://127.0.0.1:8000/ads/{post.pk}',
-        }
-    )
-
-    msg = EmailMultiAlternatives(
-        subject=f'{post.title}',
-        body=post.text,
-        from_email='Tailingen1@yandex.ru',
-        to=Category.subscribers
-    )
-    msg.attach_alternative(html_content, "text/html")
-
     msg.send()
