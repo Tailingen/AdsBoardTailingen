@@ -50,9 +50,9 @@ class ReplyCreate(LoginRequiredMixin, CreateView):
                     subject=f'Новый отклик {Reply.post}',
                     message='У вашего объявления новый отклик',
                     from_email='Tailingen1@yandex.ru',
-                    recipient_list=['Tailingen@mail.ru']
+                    recipient_list=[Reply.post.author.user.email]
                 )
-#        reply.post = Post.objects.get(pk=self.request.GET.get('post_pk'))
+        reply.post = Post.objects.get(pk=self.request.GET.get('post_pk'))
         return super().form_valid(form)
 
 
