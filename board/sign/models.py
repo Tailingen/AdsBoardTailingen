@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from allauth.account.forms import SignupForm
 from django.contrib.auth.models import Group
 from django import forms
+from django.db import models
 
 class BaseRegisterForm(UserCreationForm):
     email = forms.EmailField(label = "Email")
@@ -29,3 +30,7 @@ class BasicSignupForm(SignupForm):
         basic_group = Group.objects.get(name='common')
         basic_group.user_set.add(user)
         return user
+
+class OneTimeCode(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    secret_code = models.IntegerField(default=0)
