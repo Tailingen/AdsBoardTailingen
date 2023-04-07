@@ -25,16 +25,16 @@ class LoginCredentialView(FormView):
         email = request.POST['email']
         user = authenticate(request, username=username, password=password, email=email)
 
-        if user is None:
+        if user is not None:
             OneTimeCode.objects.create(secret_code=random.choice('12345'), user=user)
             send_mail(
                 subject='Login to board',
-                message=f'Для входа используйте ключ:',
+                message=f'Для входа используйте ключ: {OneTimeCode}',
                 from_email='Tailingen1@yandex.ru',
-                recipient_list=[request.user.email],
+                recipient_list=[user.email],
                 fail_silently=False,
             )
-            target = redirect('/key')
+            target = redirect('key/')
         else:
             target = redirect('/ads')
 
@@ -49,7 +49,7 @@ class LoginKeyView(FormView):
         username = request.POST['username']
         secret_code = request.POST['secret_code']
         if OneTimeCode.objects.filter(secret_code=secret_code, user__username=username).exists():
-            login(request, username)
+            login(request, user)
             target = redirect('/ads')
         else:
             target = redirect('/ads')
