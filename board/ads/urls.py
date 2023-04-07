@@ -1,7 +1,12 @@
 
-from django.urls import path
+from django.urls import path, include
+
+from . import admin
 from .views import (AdsList, AdsDetail, AdsCreate, AdsUpdate, AdsDelete, ReplyCreate, CategoryListView, ReplyDetail, ReplyDelete, ReplyList, notifi_reply, subscribe)
 
+#admin.site.site_header = 'GeeksForGeeks'
+#admin.site.site_title = 'GeeksForGeeks'
+#admin.site.index_title = 'GeeksForGeeks Administration'
 
 urlpatterns = [
    path('', AdsList.as_view(), name='post_list'),
@@ -16,5 +21,6 @@ urlpatterns = [
    path('replys/<int:pk>/delete/', ReplyDelete.as_view(), name='reply_delete'),
    path('<int:pk>/allreplys', ReplyList.as_view(), name='all_replys'),
    path('replys/<int:pk>/notifi', notifi_reply, name='notifi'),
+   path('editor/', include('django_summernote.urls')),
 
 ]

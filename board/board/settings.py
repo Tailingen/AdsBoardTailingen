@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'protect',
+    'django_summernote',
 ]
 
 SITE_ID = 1
@@ -168,3 +169,9 @@ CELERY_RESULT_BACKEND = 'redis://:7GeoULNGRZzTGSDjx9k296U92EZHqmNG@redis-18890.c
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# allows to load iframe from same hostname
+X_FRAME_OPTIONS = 'SAMEORIGIN'
